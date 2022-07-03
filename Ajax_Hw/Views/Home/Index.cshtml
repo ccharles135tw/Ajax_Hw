@@ -32,16 +32,16 @@
                 ]
             };
             $(".JsonToTable").click(function () {
-                let flag = true;
-                for (let i = 0; i < emp.employees.length; i++) {
-                    if (flag) {
-                        for (let j = 0; j < Object.keys(emp.employees[i]).length; j++) {
-                            $(".headtr").append(`<th>${Object.keys(emp.employees[i])[j].toString()}</th>`)
-                        }
-                        flag = !flag;
-                    }
-                    $(".tbody").append(`<tr><td>${emp.employees[i].name}</td><td>${emp.employees[i].workYears}</td><td>${emp.employees[i].salary}</td></tr>`)
+                let str = "";
+                for (let j = 0; j < Object.keys(emp.employees[0]).length; j++) {
+                    str += `<th>${Object.keys(emp.employees[0])[j].toString()}</th>`;
                 }
+                $(".headtr").append(str);
+                str = "";
+                for (let i = 0; i < emp.employees.length; i++) {
+                    str += `<tr><td>${emp.employees[i].name}</td><td>${emp.employees[i].workYears}</td><td>${emp.employees[i].salary}</td></tr>`;
+                }
+                $(".tbody").append(str);
             })
         </script>
     }
