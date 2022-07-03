@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@section Styles{
+    <style>
+        th,tr,td{
+            border-collapse:collapse;
+            border: 1px solid black;
+        }
+    </style>
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>
+    <input type="button" class="JsonToTable" value="Hw1" />
+    <table>
+        <thead class="thead">
+            <tr class="headtr"></tr>
+        </thead>
+        <tbody class="tbody">
+        </tbody>
+    </table>
+    @section Scripts{
+        <script>
+            var emp = {
+                "employees": [
+                    { "name": "Tom", "workYears": 3, "salary": 35000 },
+                    { "name": "Jack", "workYears": 5, "salary": 40000 },
+                    { "name": "Mary", "workYears": 7, "salary": 45000 }
+                ]
+            };
+            $(".JsonToTable").click(function () {
+                let flag = true;
+                for (let i = 0; i < emp.employees.length; i++) {
+                    if (flag) {
+                        for (let j = 0; j < Object.keys(emp.employees[i]).length; j++) {
+                            $(".headtr").append(`<th>${Object.keys(emp.employees[i])[j].toString()}</th>`)
+                        }
+                        flag = !flag;
+                    }
+                    $(".tbody").append(`<tr><td>${emp.employees[i].name}</td><td>${emp.employees[i].workYears}</td><td>${emp.employees[i].salary}</td></tr>`)
+                }
+            })
+        </script>
+    }
