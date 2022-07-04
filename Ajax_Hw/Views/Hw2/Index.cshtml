@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Ajax_Hw.Models.Member>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <form name="userInfo" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+                <label for="InputName">姓名</label>
+                <input type="text" class="form-control" id="InputName" name="name">
+                <small id="nameExists" class="form-text text-muted"></small>
+            </div>
+            <div class="form-group" hidden>
+                <label for="InputEmail">電子郵件</label>
+                <input type="text" class="form-control" id="InputEmail" name="email">
+            </div>
+            <div class="form-group" hidden>
+                <label for="InputAge">年紀</label>
+                <input type="number" class="form-control" id="InputAge" name="age">
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3" id="btn">Submit</button>
+        </form>
+    </div>
+    <div class="col-3"></div>
+</div>
+
+@section Scripts{
+    <script>
+        let btn = $("#btn");
+        let small = $("#nameExists");
+
+        btn.click((evt) => {
+            evt.preventDefault();
+            let formData = new FormData(document.userInfo);
+            let xhr = new XMLHttpRequest();
+            xhr.addEventListener("load", function () {
+                let data = xhr.responseText;
+                small.text("");
+                small.append(data);
+            })
+            xhr.open('POST', '@Url.Content("~/Hw2/check")');
+            xhr.send(formData);
+        })
+
+    </script>
+}
