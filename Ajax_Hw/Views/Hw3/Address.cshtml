@@ -38,8 +38,8 @@
             let response = await fetch('@Url.Content("~/Hw3/Districts")' + `?city=${selectedCity}`);
             let datas = await response.json();
             select2.empty();
-            datas.forEach(city => {
-                select2.append(new Option(city, city));
+            datas.forEach(district => {
+                select2.append(new Option(district, district));
             });
             selectedDistrict = $("#select2 :selected").val();
             loadroad();
@@ -48,8 +48,8 @@
             let response = await fetch('@Url.Content("~/Hw3/Roads")' + `?district=${selectedDistrict}`);
             let datas = await response.json();
             select3.empty();
-            datas.forEach(city => {
-                select3.append(new Option(city, city));
+            datas.forEach(road => {
+                select3.append(new Option(road, road));
             });
         };
         loadcity();
