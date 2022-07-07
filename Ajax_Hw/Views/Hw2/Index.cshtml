@@ -8,10 +8,10 @@
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
-        <form name="userInfo" method="post" enctype="application/x-www-form-urlencoded">
+        <form id="userInfo" method="post" enctype="application/x-www-form-urlencoded">
             <div class="form-group">
                 <label for="InputName">姓名</label>
-                <input type="text" class="form-control" id="InputName" name="name">
+                <input type="text" class="form-control" id="InputName" name="Name">
                 <small id="nameExists" class="form-text text-muted"></small>
             </div>
             <div class="form-group" hidden>
@@ -31,12 +31,12 @@
 
 @section Scripts{
     <script>
-        let btn = $("#btn");
+        let textBox = $("#InputName");
         let small = $("#nameExists");
 
-        btn.click((evt) => {
-            evt.preventDefault();
-            let formData = new FormData(document.userInfo);
+        textBox.blur(() => {
+            let text = textBox.val();
+            console.log(text);
             let xhr = new XMLHttpRequest();
             xhr.addEventListener("load", function () {
                 let data = xhr.responseText;
@@ -44,7 +44,8 @@
                 small.append(data);
             })
             xhr.open('POST', '@Url.Content("~/Hw2/check")');
-            xhr.send(formData);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.send(`name=${text}`);
         })
 
     </script>

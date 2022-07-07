@@ -19,16 +19,16 @@ namespace Ajax_Hw.Controllers
         {
             return View();
         }
-        public IActionResult check(Member mem)
+        public IActionResult check(string name)
         {
-            var a = _democontext.Members.FirstOrDefault(x => x.Name == mem.Name);
+            var a = _democontext.Members.FirstOrDefault(x => x.Name == name);
             if (a != null)
             {
-                return Content($"{mem.Name}已被使用。", "text/html", System.Text.Encoding.UTF8);
+                return Content($"{name}已被使用。", "text/html", System.Text.Encoding.UTF8);
             }
             else
             {
-                return Content($"{mem.Name}可以使用。", "text/html", System.Text.Encoding.UTF8);
+                return Content($"{name}可以使用。", "text/html", System.Text.Encoding.UTF8);
             }
             
         }
